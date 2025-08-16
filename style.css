@@ -1,8 +1,7 @@
 /*
- * Global styles for Rifo Ahmad Genadi’s profile site.
- * The design uses a clean, modern aesthetic with ample white space
- * and a subtle accent colour inspired by the hero image. Media
- * queries ensure readability on smaller screens.
+ * Global styles for Rifo Ahmad Genadi's profile site.
+ * Elegant black and white minimalist design with clean typography
+ * and subtle spacing for maximum readability and sophistication.
  */
 
 /* Reset and base styles */
@@ -14,155 +13,188 @@
 
 html,
 body {
-    font-family: 'Inter', Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #fafafa;
+    font-family: 'Inter', 'Georgia', serif;
+    line-height: 1.7;
+    color: #1a1a1a;
+    background-color: #ffffff;
     scroll-behavior: smooth;
 }
 
 a {
-    color: #0067b8;
+    color: #000000;
     text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom 0.2s ease;
 }
 a:hover {
-    text-decoration: underline;
+    border-bottom: 1px solid #000000;
 }
 
-/* Hero section */
+/* Hero section - elegant black and white */
 .hero {
-    position: relative;
-    height: 80vh;
-    background-image: url('images/hero.png');
-    background-size: cover;
-    background-position: center;
+    padding: 4rem 2rem;
+    background-color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: #fff;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 20, 60, 0.6);
-    z-index: 1;
+    color: #1a1a1a;
+    border-bottom: 1px solid #e8e8e8;
 }
 
 .hero-content {
-    position: relative;
-    z-index: 2;
     max-width: 800px;
     padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.portrait {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #1a1a1a;
+    object-fit: cover;
+}
+
+.hero-text {
+    text-align: center;
 }
 
 .hero h1 {
     font-size: 3rem;
-    font-weight: 700;
+    font-weight: 300;
     margin-bottom: 0.5rem;
     letter-spacing: -1px;
+    font-family: 'Georgia', serif;
 }
 
 .tagline {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 400;
     margin-bottom: 1.5rem;
+    color: #4a4a4a;
+    font-style: italic;
 }
 
 .button {
     display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background-color: #0067b8;
-    color: #fff;
-    border-radius: 4px;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
+    padding: 0.75rem 2rem;
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px solid #000000;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
 }
 .button:hover {
-    background-color: #004b8d;
+    background-color: #ffffff;
+    color: #000000;
+    border-bottom: 2px solid #000000;
 }
 
 /* Main container */
 .container {
     width: 90%;
-    max-width: 1000px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 3rem 0;
 }
 
 section {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
+    padding: 0 2rem;
 }
 
 section h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #004b8d;
-    border-bottom: 2px solid #e0e7ef;
-    padding-bottom: 0.5rem;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: #1a1a1a;
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 0.75rem;
+    font-weight: 400;
+    font-family: 'Georgia', serif;
 }
 
 /* Timeline styles for education */
 .timeline {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 .timeline-item h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
 }
 .timeline-date {
-    font-size: 0.95rem;
-    color: #666;
-    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #6a6a6a;
+    margin-bottom: 0.75rem;
     display: block;
+    font-style: italic;
 }
 
 /* Experience entries */
 .experience-entry {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    border-left: 2px solid #f0f0f0;
+    padding-left: 1.5rem;
 }
 .experience-entry h3 {
     font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
 }
 .experience-entry ul {
-    list-style: disc inside;
-    padding-left: 1rem;
-    margin-top: 0.5rem;
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0.75rem;
 }
 .experience-entry li {
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.6rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+.experience-entry li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: #4a4a4a;
+    font-weight: bold;
 }
 
 /* Projects grid */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
 }
 .project-card {
-    background: #fff;
-    border: 1px solid #e0e7ef;
-    border-radius: 6px;
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    padding: 1.5rem;
+    transition: border-color 0.3s ease;
+}
+.project-card:hover {
+    border-color: #1a1a1a;
 }
 .project-card h3 {
     font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    color: #004b8d;
+    margin-bottom: 0.75rem;
+    color: #1a1a1a;
+    font-weight: 500;
 }
 .project-card p {
     font-size: 0.95rem;
-    line-height: 1.4;
+    line-height: 1.6;
+    color: #4a4a4a;
 }
 
 /* Publications & Awards lists */
@@ -171,49 +203,85 @@ section h2 {
     padding-left: 0;
 }
 .list li {
-    margin-bottom: 0.5rem;
-    padding-left: 1.2rem;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
     position: relative;
+    line-height: 1.6;
 }
 .list li::before {
-    content: '•';
+    content: '◦';
     position: absolute;
     left: 0;
-    color: #0067b8;
+    color: #1a1a1a;
+    font-size: 1.2rem;
 }
 
 /* Contact section */
 .contact-list {
     list-style: none;
     padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
 }
 .contact-list li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     font-size: 1rem;
 }
 .contact-list a {
-    color: #0067b8;
-    font-weight: 500;
+    color: #1a1a1a;
+    font-weight: 400;
 }
 
 /* Footer */
 footer {
-    background-color: #0d1b2a;
-    color: #cbd5e1;
+    background-color: #1a1a1a;
+    color: #ffffff;
     text-align: center;
-    padding: 1rem 0;
+    padding: 2rem 0;
     font-size: 0.9rem;
+    border-top: 1px solid #e8e8e8;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2.4rem;
+    .hero {
+        padding: 2rem 1rem;
     }
+    
+    .hero-content {
+        gap: 1.5rem;
+    }
+    
+    .portrait {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    
     .tagline {
         font-size: 1rem;
     }
+    
     .container {
-        width: 90%;
+        width: 95%;
+        padding: 2rem 0;
+    }
+    
+    section {
+        padding: 0 1rem;
+        margin-bottom: 3rem;
+    }
+    
+    .project-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .contact-list {
+        grid-template-columns: 1fr;
     }
 }
