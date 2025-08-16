@@ -55,6 +55,33 @@ section h2 {
     font-family: 'Georgia', serif;
 }
 
+/* About section with photo */
+.about-content {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+.about-photo {
+    flex-shrink: 0;
+}
+
+.profile-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #1a1a1a;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-text h2 {
+    margin-top: 0;
+}
+
 /* Timeline styles for education */
 .timeline {
     display: flex;
@@ -188,6 +215,21 @@ footer {
     section {
         padding: 0 1rem;
         margin-bottom: 3rem;
+    }
+    
+    .about-content {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .profile-photo {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .about-text {
+        text-align: left;
     }
     
     .project-grid {
