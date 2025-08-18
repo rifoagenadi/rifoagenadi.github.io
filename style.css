@@ -178,6 +178,30 @@ section h2 {
     font-size: 1.2rem;
 }
 
+/* Resume download section */
+.resume-download {
+    text-align: center;
+    margin: 2rem 0;
+}
+.resume-btn {
+    display: inline-block;
+    background-color: #1a1a1a;
+    color: #ffffff !important;
+    padding: 1rem 2rem;
+    border: 2px solid #1a1a1a;
+    border-radius: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-bottom: none !important;
+}
+.resume-btn:hover {
+    background-color: #ffffff;
+    color: #1a1a1a !important;
+    border-bottom: none !important;
+}
+
 /* Contact section */
 .contact-list {
     list-style: none;
