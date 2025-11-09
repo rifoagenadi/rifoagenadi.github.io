@@ -83,17 +83,31 @@ body {
     cursor: pointer;
 }
 
+.dropdown::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 0.75rem;
+    display: none;
+}
+
+.dropdown:hover::before {
+    display: block;
+}
+
 .dropdown-menu {
     display: none;
     position: absolute;
-    top: 100%;
+    top: calc(100% + 0.75rem);
     left: 0;
     background-color: #ffffff;
     border: 1px solid #e8e8e8;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     list-style: none;
     padding: 0.5rem 0;
-    margin-top: 0.5rem;
+    margin-top: 0;
     min-width: 220px;
     z-index: 1001;
 }
