@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Random Number Generator – Rifo Ahmad Genadi</title>
+    <!-- Import Google Fonts for elegant typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Navigation highlight for current page */
+        .nav-menu .dropdown:hover > a {
+            border-bottom: 2px solid #1a1a1a;
+        }
+        
+        /* Additional styles specific to the random number generator */
+        .generator-container {
+            text-align: center;
+            padding: 4rem 2rem;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .number-display {
+            font-size: 4rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 3rem 0;
+            min-height: 5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .number-display.fade {
+            opacity: 0.3;
+            transform: scale(0.95);
+        }
+        
+        .generate-btn {
+            display: inline-block;
+            background-color: #1a1a1a;
+            color: #ffffff !important;
+            padding: 1.25rem 3rem;
+            border: 2px solid #1a1a1a;
+            border-radius: 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: none !important;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .generate-btn:hover {
+            background-color: #ffffff;
+            color: #1a1a1a !important;
+            border-bottom: none !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .generate-btn:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+        
+        .back-link {
+            margin-top: 3rem;
+            font-size: 1rem;
+        }
+        
+        .settings {
+            margin: 2rem 0;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .setting-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .setting-group label {
+            font-size: 1rem;
+            color: #4a4a4a;
+        }
+        
+        .setting-group input {
+            width: 120px;
+            padding: 0.5rem;
+            border: 1px solid #e8e8e8;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.2s ease;
+        }
+        
+        .setting-group input:focus {
+            outline: none;
+            border-color: #1a1a1a;
+        }
+        
+        @media (max-width: 768px) {
+            .number-display {
+                font-size: 3rem;
+                min-height: 4rem;
+            }
+            
+            .generate-btn {
+                font-size: 1.1rem;
+                padding: 1rem 2rem;
+            }
+            
+            .settings {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="nav-header">
+        <nav class="nav-container">
+            <a href="index.html" class="nav-logo">Rifo Ahmad Genadi</a>
+            <ul class="nav-menu">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#education">Education</a></li>
+                <li><a href="index.html#publications">Publications</a></li>
+                <li><a href="index.html#awards">Awards</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Fun Projects ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="poop.html">🎲 Random Number Generator</a></li>
+                        <li><a href="gallery.html">🖼️ Gallery</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content container -->
+    <main class="container">
+        <section>
+            <h2>Random Number Generator</h2>
+            
+            <div class="generator-container">
+                <div class="settings">
+                    <div class="setting-group">
+                        <label for="minValue">Min:</label>
+                        <input type="number" id="minValue" value="1" />
+                    </div>
+                    <div class="setting-group">
+                        <label for="maxValue">Max:</label>
+                        <input type="number" id="maxValue" value="100" />
+                    </div>
+                </div>
+                
+                <div class="number-display" id="numberDisplay">
+                    Click below to generate
+                </div>
+                
+                <button class="generate-btn" id="generateBtn">
+                    Generate Random Number
+                </button>
+                
+                <div class="back-link">
+                    <a href="index.html">← Back to Home</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; <span id="year"></span> Rifo Ahmad Genadi. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for random number generation -->
+    <script>
+        // Update year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Random number generator logic
+        const generateBtn = document.getElementById('generateBtn');
+        const numberDisplay = document.getElementById('numberDisplay');
+        const minInput = document.getElementById('minValue');
+        const maxInput = document.getElementById('maxValue');
+        
+        function generateRandomNumber() {
+            const min = parseInt(minInput.value) || 1;
+            const max = parseInt(maxInput.value) || 100;
+            
+            // Validate inputs
+            if (min >= max) {
+                numberDisplay.textContent = 'Min must be less than Max!';
+                return;
+            }
+            
+            // Add fade effect
+            numberDisplay.classList.add('fade');
+            
+            setTimeout(() => {
+                // Generate random number between min and max (inclusive)
+                const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+                numberDisplay.textContent = randomNum;
+                numberDisplay.classList.remove('fade');
+            }, 150);
+        }
+        
+        // Add click event listener
+        generateBtn.addEventListener('click', generateRandomNumber);
+        
+        // Allow Enter key to generate
+        [minInput, maxInput].forEach(input => {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    generateRandomNumber();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
