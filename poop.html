@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Random Number Generator – Rifo Ahmad Genadi</title>
+    <title>Poop Gashapon – Rifo Ahmad Genadi</title>
     <!-- Import Google Fonts for elegant typography -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Link to external stylesheet -->
@@ -15,8 +15,8 @@
             border-bottom: 2px solid #1a1a1a;
         }
         
-        /* Additional styles specific to the random number generator */
-        .generator-container {
+        /* Gashapon container */
+        .gashapon-container {
             text-align: center;
             padding: 4rem 2rem;
             min-height: 60vh;
@@ -26,31 +26,142 @@
             align-items: center;
         }
         
-        .number-display {
-            font-size: 4rem;
-            font-weight: 600;
-            color: #1a1a1a;
+        /* Capsule animation container */
+        .capsule-container {
             margin: 3rem 0;
-            min-height: 5rem;
+            min-height: 300px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
+            position: relative;
         }
         
-        .number-display.fade {
-            opacity: 0.3;
-            transform: scale(0.95);
+        /* Capsule (toilet paper roll style) */
+        .capsule {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
         }
         
-        .generate-btn {
+        .capsule::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Shake animation */
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            10% { transform: rotate(-15deg) scale(1.05); }
+            20% { transform: rotate(15deg) scale(1.05); }
+            30% { transform: rotate(-15deg) scale(1.05); }
+            40% { transform: rotate(15deg) scale(1.05); }
+            50% { transform: rotate(-10deg) scale(1.05); }
+            60% { transform: rotate(10deg) scale(1.05); }
+            70% { transform: rotate(-5deg) scale(1.05); }
+            80% { transform: rotate(5deg) scale(1.05); }
+            90% { transform: rotate(0deg) scale(1.05); }
+        }
+        
+        /* Pop and fade out animation */
+        @keyframes popOut {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        
+        /* Reveal animation */
+        @keyframes reveal {
+            0% { transform: scale(0) rotate(180deg); opacity: 0; }
+            50% { transform: scale(1.1) rotate(0deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        
+        .capsule.shaking {
+            animation: shake 1s ease-in-out;
+        }
+        
+        .capsule.popping {
+            animation: popOut 0.5s ease-out forwards;
+        }
+        
+        /* Result display */
+        .result-display {
+            display: none;
+            animation: reveal 0.8s ease-out;
+        }
+        
+        .result-display.show {
+            display: block;
+        }
+        
+        .result-image {
+            max-width: 300px;
+            max-height: 300px;
+            border: 3px solid #1a1a1a;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .result-info {
+            margin-top: 2rem;
+            max-width: 500px;
+            text-align: left;
+            background: #f9f9f9;
+            padding: 2rem;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+        }
+        
+        .result-info h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+        
+        .result-info p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            margin-bottom: 1rem;
+        }
+        
+        .result-info .fun-facts {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e8e8e8;
+        }
+        
+        .result-info .fun-facts h4 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            color: #1a1a1a;
+        }
+        
+        /* Button */
+        .gashapon-btn {
             display: inline-block;
             background-color: #1a1a1a;
             color: #ffffff !important;
             padding: 1.25rem 3rem;
             border: 2px solid #1a1a1a;
-            border-radius: 0;
+            border-radius: 50px;
             font-size: 1.2rem;
             font-weight: 500;
             cursor: pointer;
@@ -59,17 +170,24 @@
             font-family: 'Inter', sans-serif;
         }
         
-        .generate-btn:hover {
+        .gashapon-btn:hover {
             background-color: #ffffff;
             color: #1a1a1a !important;
             border-bottom: none !important;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
         
-        .generate-btn:active {
-            transform: translateY(0);
-            box-shadow: none;
+        .gashapon-btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gashapon-btn:disabled {
+            background-color: #ccc;
+            border-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
         }
         
         .back-link {
@@ -77,54 +195,82 @@
             font-size: 1rem;
         }
         
-        .settings {
-            margin: 2rem 0;
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
+        .intro-text {
+            font-size: 1.1rem;
+            color: #4a4a4a;
+            margin-bottom: 2rem;
+            max-width: 600px;
         }
         
-        .setting-group {
-            display: flex;
+        /* Illustrator credit */
+        .illustrator-credit {
+            margin-top: 2rem;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            display: inline-flex;
             align-items: center;
             gap: 0.75rem;
-        }
-        
-        .setting-group label {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #4a4a4a;
+            transition: all 0.3s ease;
         }
         
-        .setting-group input {
-            width: 120px;
-            padding: 0.5rem;
-            border: 1px solid #e8e8e8;
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif;
-            transition: border-color 0.2s ease;
-        }
-        
-        .setting-group input:focus {
-            outline: none;
+        .illustrator-credit:hover {
+            background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
             border-color: #1a1a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .illustrator-credit .label {
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+        
+        .illustrator-credit a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #E4405F;
+            text-decoration: none;
+            border-bottom: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .illustrator-credit a:hover {
+            color: #d62976;
+            border-bottom: none;
+            transform: scale(1.05);
+        }
+        
+        .instagram-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
         }
         
         @media (max-width: 768px) {
-            .number-display {
-                font-size: 3rem;
-                min-height: 4rem;
+            .capsule {
+                width: 150px;
+                height: 150px;
+                font-size: 4rem;
             }
             
-            .generate-btn {
+            .result-image {
+                max-width: 250px;
+                max-height: 250px;
+            }
+            
+            .result-info {
+                padding: 1.5rem;
+            }
+            
+            .gashapon-btn {
                 font-size: 1.1rem;
                 padding: 1rem 2rem;
-            }
-            
-            .settings {
-                flex-direction: column;
-                gap: 1rem;
             }
         }
     </style>
@@ -142,39 +288,52 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">Fun Projects ▾</a>
                     <ul class="dropdown-menu">
-                        <li><a href="poop.html">🎲 Random Number Generator</a></li>
+                        <li><a href="poop.html">💩 Poop Gashapon</a></li>
                         <li><a href="gallery.html">🖼️ Gallery</a></li>
                     </ul>
                 </li>
                 <li><a href="index.html#contact">Contact</a></li>
-            </ul>
+            </ul >
         </nav>
     </header>
 
     <!-- Main content container -->
     <main class="container">
         <section>
-            <h2>Random Number Generator</h2>
+            <h2>Poop Gashapon 💩</h2>
             
-            <div class="generator-container">
-                <div class="settings">
-                    <div class="setting-group">
-                        <label for="minValue">Min:</label>
-                        <input type="number" id="minValue" value="1" />
+            <div class="gashapon-container">                
+                <div class="capsule-container">
+                    <div class="capsule" id="capsule">
+                        🧻
                     </div>
-                    <div class="setting-group">
-                        <label for="maxValue">Max:</label>
-                        <input type="number" id="maxValue" value="100" />
+                    
+                    <div class="result-display" id="resultDisplay">
+                        <img class="result-image" id="resultImage" src="" alt="Poop Character">
+                        <div class="result-info" id="resultInfo">
+                            <h3 id="poopName"></h3>
+                            <p id="poopDescription"></p>
+                            <div class="fun-facts">
+                                <h4>Fun Facts:</h4>
+                                <p id="poopFacts"></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="number-display" id="numberDisplay">
-                    Click below to generate
-                </div>
-                
-                <button class="generate-btn" id="generateBtn">
-                    Generate Random Number
+                <button class="gashapon-btn" id="gashaponBtn">
+                    🎲 Roll the Capsule!
                 </button>
+                
+                <div class="illustrator-credit">
+                    <span class="label">Illustrations by</span>
+                    <a href="https://www.instagram.com/siboki17/" target="_blank" rel="noopener noreferrer">
+                        <svg class="instagram-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                        @siboki17
+                    </a>
+                </div>
                 
                 <div class="back-link">
                     <a href="index.html">← Back to Home</a>
@@ -183,54 +342,110 @@
         </section>
     </main>
 
+    <!-- Audio elements for sound effects -->
+    <audio id="shakeSound" src="sounds/shake.mp3" preload="auto"></audio>
+    <audio id="revealSound" src="sounds/henshin.mp3" preload="auto"></audio>
+
     <!-- Footer -->
     <footer>
         <p>&copy; <span id="year"></span> Rifo Ahmad Genadi. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript for random number generation -->
+    <!-- JavaScript for gashapon animation -->
     <script>
         // Update year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
         
-        // Random number generator logic
-        const generateBtn = document.getElementById('generateBtn');
-        const numberDisplay = document.getElementById('numberDisplay');
-        const minInput = document.getElementById('minValue');
-        const maxInput = document.getElementById('maxValue');
-        
-        function generateRandomNumber() {
-            const min = parseInt(minInput.value) || 1;
-            const max = parseInt(maxInput.value) || 100;
-            
-            // Validate inputs
-            if (min >= max) {
-                numberDisplay.textContent = 'Min must be less than Max!';
-                return;
+        // Poop characters data
+        const poopCharacters = [
+            {
+                name: "Liner the Elegant",
+                image: "images/poops/line.jpeg",
+                description: "A sophisticated poop with clean, straight lines. Liner is known for being organized and always keeping things in order.",
+                facts: "Liner only appears on Mondays and always starts the week right. Legend says Liner was once a perfect coil but decided to go straight edge!"
+            },
+            {
+                name: "Swirly the Magnificent",
+                image: "images/poops/swirl.jpeg",
+                description: "A whimsical poop with hypnotic swirls. Swirly brings joy and wonder wherever it goes, spinning tales of adventure.",
+                facts: "Swirly can spin 360 degrees in under 2 seconds! This poop is said to have the power to make people dizzy just by looking at it."
             }
+        ];
+        
+        // Gashapon logic
+        const gashaponBtn = document.getElementById('gashaponBtn');
+        const capsule = document.getElementById('capsule');
+        const resultDisplay = document.getElementById('resultDisplay');
+        const resultImage = document.getElementById('resultImage');
+        const poopName = document.getElementById('poopName');
+        const poopDescription = document.getElementById('poopDescription');
+        const poopFacts = document.getElementById('poopFacts');
+        
+        // Audio elements
+        const shakeSound = document.getElementById('shakeSound');
+        const revealSound = document.getElementById('revealSound');
+        
+        let isAnimating = false;
+        
+        function playSound(audio) {
+            // Reset and play sound
+            audio.currentTime = 0;
+            audio.play().catch(err => {
+                console.log('Audio play failed:', err);
+                // Fallback: audio might be blocked by browser autoplay policy
+            });
+        }
+        
+        function rollGashapon() {
+            if (isAnimating) return;
             
-            // Add fade effect
-            numberDisplay.classList.add('fade');
+            isAnimating = true;
+            gashaponBtn.disabled = true;
             
+            // Hide previous result
+            resultDisplay.classList.remove('show');
+            capsule.style.display = 'flex';
+            
+            // Start shake animation with sound
+            capsule.classList.add('shaking');
+            playSound(shakeSound);
+            
+            // After shake, do pop animation
             setTimeout(() => {
-                // Generate random number between min and max (inclusive)
-                const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
-                numberDisplay.textContent = randomNum;
-                numberDisplay.classList.remove('fade');
-            }, 150);
+                capsule.classList.remove('shaking');
+                capsule.classList.add('popping');
+                
+                // Play henshin sound when popping
+                playSound(revealSound);
+                
+                // Select random poop
+                const randomPoop = poopCharacters[Math.floor(Math.random() * poopCharacters.length)];
+                
+                // After pop animation, show result
+                setTimeout(() => {
+                    capsule.style.display = 'none';
+                    capsule.classList.remove('popping');
+                    
+                    // Set result data
+                    resultImage.src = randomPoop.image;
+                    poopName.textContent = randomPoop.name;
+                    poopDescription.textContent = randomPoop.description;
+                    poopFacts.textContent = randomPoop.facts;
+                    
+                    // Show result with animation
+                    resultDisplay.classList.add('show');
+                    
+                    // Reset after showing result
+                    setTimeout(() => {
+                        isAnimating = false;
+                        gashaponBtn.disabled = false;
+                    }, 800);
+                }, 500);
+            }, 1000);
         }
         
         // Add click event listener
-        generateBtn.addEventListener('click', generateRandomNumber);
-        
-        // Allow Enter key to generate
-        [minInput, maxInput].forEach(input => {
-            input.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    generateRandomNumber();
-                }
-            });
-        });
+        gashaponBtn.addEventListener('click', rollGashapon);
     </script>
 </body>
 </html>
